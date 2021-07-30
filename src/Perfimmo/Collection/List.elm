@@ -5,6 +5,9 @@ module Perfimmo.Collection.List exposing
     , collectFirst
     )
 {-| Utils function on list
+
+@docs insertAt, splitIf, flatten, collectFirst
+
 -}
 import List.Extra as ListE
 import List.FlatMap as ListF
@@ -27,6 +30,9 @@ splitIf predicate list =
             _ -> ListE.updateAt (List.length acc - 1) (\x -> x ++ [elem]) acc
     ) [] list
 
+{-| flatten
+-}
+flatten : List (List b) -> List b
 flatten = ListF.flatMap identity
 
 {-| insertAt

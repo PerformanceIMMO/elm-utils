@@ -9,6 +9,9 @@ import Http
 import Maybe.FlatMap exposing (flatMap)
 import Dict exposing (Dict)
 import List.Extra exposing (last)
+
+{-| ContentRange
+-}
 type alias ContentRange = { {-start: Int, end: Int, -}total: Int }
 
 {-| fieldFromContentRangeHeader

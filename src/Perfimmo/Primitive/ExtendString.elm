@@ -1,6 +1,12 @@
 module Perfimmo.Primitive.ExtendString exposing
     (maybeStringToMaybeNonEmptyString, stringToNonEmptyString)
 
+{-| ExtendString
+
+@docs maybeStringToMaybeNonEmptyString, stringToNonEmptyString
+-}
+
+
 {-| maybeStringToMaybeNonEmptyString
 -}
 maybeStringToMaybeNonEmptyString: Maybe String -> Maybe String

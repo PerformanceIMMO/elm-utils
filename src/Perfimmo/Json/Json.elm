@@ -1,5 +1,10 @@
 module Perfimmo.Json.Json exposing (cleanJson)
 
+{-| Json
+
+@docs cleanJson
+-}
+
 import Json.Value exposing (..)
 import Tuple exposing (second)
 
