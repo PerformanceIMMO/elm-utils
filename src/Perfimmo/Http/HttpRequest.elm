@@ -16,7 +16,7 @@ module Perfimmo.Http.HttpRequest exposing
 {-| HttpRequest
 
 # Types
-@docs Request(..), BodyResponse(..), HttpError(..), HttpResult, ResponseDecoder
+@docs Request, BodyResponse, HttpError, HttpResult, ResponseDecoder
 
 # Functions
 @docs withAuthReq, request, authRequest

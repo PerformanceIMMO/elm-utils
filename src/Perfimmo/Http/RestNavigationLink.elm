@@ -6,7 +6,7 @@ module Perfimmo.Http.RestNavigationLink exposing
 
 {-| RestNavigationLink
 
-@docs  RestNavigationLink, setHref, HttpVerb(..)
+@docs  RestNavigationLink, setHref, HttpVerb
 -}
 
 {-| RestNavigationLink
