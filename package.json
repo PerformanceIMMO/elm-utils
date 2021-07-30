@@ -1,0 +1,15 @@
+{
+    "name": "perfimmo-elm-utils",
+    "version": "0.0.1",
+    "license": "GPL-3.0",
+    "repository": "https://github.com/PerformanceIMMO/elm-utils.git",
+    "private": true,
+    "dependencies": {
+        "elm": "^0.19.1-5",
+        "elm-test": "^0.19.1-revision7"
+    },
+    "scripts": {
+        "elm-exposed-module": "find src -name \"*.elm\" | cut -c5- | sed \"y/\\//./\" | sed \"s/.elm//\"",
+        "compile": "elm make"
+    }
+}

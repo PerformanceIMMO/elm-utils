@@ -1,0 +1,24 @@
+root = true
+[*]
+charset = utf-8
+end_of_line = lf
+
+[Makefile]
+indent_style = tab
+indent_size = tab
+
+[*.json]
+indent_style = space
+indent_size = 4
+
+[*.elm]
+indent_style = space
+indent_size = 4
+
+[*.less]
+indent_style = space
+indent_size = 4
+
+[*.scss]
+indent_style = space
+indent_size = 4
