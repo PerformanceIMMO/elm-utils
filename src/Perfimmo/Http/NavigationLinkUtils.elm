@@ -1,6 +1,6 @@
-module Perfimmo.Http.NavigationLinkUtils exposing (..)
+module Perfimmo.Http.NavigationLinkUtils exposing (findNavLink)
 
-import RestNavigationLink exposing (RestNavigationLink)
+import Perfimmo.Http.RestNavigationLink exposing (RestNavigationLink)
 import List.Extra as List
 
 findNavLink: String -> List RestNavigationLink -> Maybe RestNavigationLink

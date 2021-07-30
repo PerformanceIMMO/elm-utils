@@ -1,4 +1,8 @@
-module Perfimmo.Cmd.ActionToCmd exposing (..)
+module Perfimmo.Cmd.ActionToCmd exposing (msgToElmCmd)
+
+{-
+Launch action in one line
+-}
 
 import Task
 

@@ -4,7 +4,9 @@ module Perfimmo.Collection.List exposing
     , flatten
     , collectFirst
     )
-
+{-
+Utils function on list
+-}
 import List.Extra as ListE
 import List.FlatMap as ListF
 
