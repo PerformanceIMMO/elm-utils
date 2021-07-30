@@ -1,6 +1,6 @@
 {
     "name": "perfimmo-elm-utils",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "license": "GPL-3.0",
     "repository": "https://github.com/PerformanceIMMO/elm-utils.git",
     "private": true,
