@@ -7,6 +7,8 @@ type alias ValueToUpate = JsonValue
 type alias Path = List String
 type alias PathValue = JsonValue
 
+{-| cleanJson
+-}
 cleanJson: JsonValue -> JsonValue
 cleanJson json =
     case json of
@@ -31,6 +33,8 @@ cleanJson json =
         NumericValue _ -> json
 
 
+{-| isNull
+-}
 isNull: JsonValue -> Bool
 isNull json =
     case json of

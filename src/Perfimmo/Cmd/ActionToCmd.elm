@@ -8,7 +8,6 @@ module Perfimmo.Cmd.ActionToCmd exposing (msgToElmCmd)
 import Task
 
 {-|  Launch action in one line
-
 -}
 msgToElmCmd : a -> Cmd a
 msgToElmCmd = Task.succeed >> Task.perform identity

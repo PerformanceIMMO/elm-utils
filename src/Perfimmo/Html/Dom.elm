@@ -3,8 +3,9 @@ module Perfimmo.Html.Dom exposing
     , buildOptions
     )
 
-{-
-Handle event propagation
+{-| Handle event propagation
+
+@docs onClick_stopProp, buildOptions
 -}
 
 import Html.Styled.Events exposing (stopPropagationOn)
@@ -12,9 +13,13 @@ import Json.Decode as Decode exposing (Decoder)
 import Html.Styled exposing (Html, option, text)
 import Html.Styled.Attributes exposing (id, selected, value)
 
+{-| onClick_stopProp
+-}
 onClick_stopProp: msg -> Html.Styled.Attribute msg
 onClick_stopProp msg = stopPropagationOn "click" (Decode.succeed (msg,True))
 
+{-| buildOptions
+-}
 buildOptions : Maybe String -> List (String, String) -> List (Html msg)
 buildOptions value values =
     (Maybe.map (always []) value

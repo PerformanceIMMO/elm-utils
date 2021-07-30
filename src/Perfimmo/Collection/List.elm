@@ -4,17 +4,20 @@ module Perfimmo.Collection.List exposing
     , flatten
     , collectFirst
     )
-{-
-Utils function on list
+{-| Utils function on list
 -}
 import List.Extra as ListE
 import List.FlatMap as ListF
 
+{-| insertAtRec
+-}
 insertAtRec : Int -> a -> List a -> List a
 insertAtRec index element list =
     if index <= 0 then element :: list
     else List.take index list ++ (element :: List.drop index list)
 
+{-| splitIf
+-}
 splitIf: (a -> Bool) -> List a -> List (List a)        -- TODO l'élément splitter doit etre avant et non après
 splitIf predicate list =
     List.foldl (\elem acc ->
@@ -26,10 +29,14 @@ splitIf predicate list =
 
 flatten = ListF.flatMap identity
 
+{-| insertAt
+-}
 insertAt: Int -> a -> List a -> List a
 insertAt i x l =
     let (before, after) = ListE.splitAt i l
     in before ++ [x] ++ after
 
+{-| collectFirst
+-}
 collectFirst: (a -> Maybe b) -> List a -> Maybe b
 collectFirst predicate list = List.filterMap predicate list |> List.head
