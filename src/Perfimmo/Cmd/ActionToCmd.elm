@@ -2,6 +2,8 @@ module Perfimmo.Cmd.ActionToCmd exposing (msgToElmCmd)
 
 {-|
 Launch action in one line
+
+@docs msgToElmCmd
 -}
 
 import Task
