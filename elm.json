@@ -3,12 +3,13 @@
     "name": "PerformanceIMMO/elm-utils",
     "summary": "All common types and functions used by perfimmo dev",
     "license": "GPL-3.0",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "exposed-modules": [
         "Perfimmo.Primitive.CharUtils",
         "Perfimmo.Primitive.ExtendString",
         "Perfimmo.Primitive.BoolUtils",
         "Perfimmo.Cmd.ActionToCmd",
+        "Perfimmo.Http.RestNavigationLinkDecoder",
         "Perfimmo.Http.HttpRequest",
         "Perfimmo.Http.RestNavigationLink",
         "Perfimmo.Http.Headers",
@@ -16,10 +17,12 @@
         "Perfimmo.Collection.NonEmptyList",
         "Perfimmo.Collection.List",
         "Perfimmo.Html.Dom",
-        "Perfimmo.Json.Json"
+        "Perfimmo.Json.Json",
+        "Perfimmo.Json.Decoder"
     ],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {
+        "NoRedInk/elm-json-decode-pipeline": "1.0.0 <= v < 2.0.0",
         "ccapndave/elm-flat-map": "1.2.0 <= v < 2.0.0",
         "elm/core": "1.0.0 <= v < 2.0.0",
         "elm/html": "1.0.0 <= v < 2.0.0",
