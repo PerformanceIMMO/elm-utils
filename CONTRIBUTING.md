@@ -12,3 +12,15 @@
 ## Exposed module
 
 Run `yarn elm-exposed-module` and edit `elm.json` the needed entry
+
+#publish
+             
+- git tag x.x.x
+
+- elm diff
+
+- elm bump
+
+- git push --tags origin master
+
+- elm publish

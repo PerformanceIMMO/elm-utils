@@ -3,10 +3,10 @@ module Perfimmo.Collection.List exposing
     , splitIf
     , flatten
     , collectFirst
-    )
+    , tail)
 {-| Utils function on list
 
-@docs insertAt, splitIf, flatten, collectFirst
+@docs insertAt, splitIf, flatten, collectFirst, tail
 
 -}
 import List.Extra as ListE
@@ -46,3 +46,9 @@ insertAt i x l =
 -}
 collectFirst: (a -> Maybe b) -> List a -> Maybe b
 collectFirst predicate list = List.filterMap predicate list |> List.head
+
+{-| tail
+    an iq tail with 'Maybe List a' is so bad
+-}
+tail: List a -> List a
+tail xs = List.tail xs |> Maybe.withDefault []
