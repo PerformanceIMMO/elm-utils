@@ -10,6 +10,11 @@
     },
     "scripts": {
         "elm-exposed-module": "find src -name \"*.elm\" | cut -c5- | sed \"y/\\//./\" | sed \"s/.elm//\"",
-        "compile": "elm make"
+        "compile": "yarn elm make"
+    },
+    "devDependencies": {
+        "elm-doc-preview": "5.0.5",
+        "elm-json": "0.2.10",
+        "elm-review": "2.6.1"
     }
 }
