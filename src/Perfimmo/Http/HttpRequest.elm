@@ -12,7 +12,7 @@ module Perfimmo.Http.HttpRequest exposing
     , request
     , authRequest
     , bool2Uri
-    )
+    , printHttpError)
 {-| HttpRequest
 
 # Types
@@ -20,6 +20,9 @@ module Perfimmo.Http.HttpRequest exposing
 
 # Functions
 @docs withAuthReq, request, authRequest
+
+# Helper
+@docs printHttpError
 
 # Expect
 @docs expectJsonResponse, expectWhateverResponse, expectJsonResponse2, expectWhateverOkResult
@@ -29,7 +32,7 @@ module Perfimmo.Http.HttpRequest exposing
 
 -}
 import Perfimmo.Http.RestNavigationLink exposing (HttpVerb(..), RestNavigationLink)
-import Http exposing (Expect, Response, expectStringResponse)
+import Http exposing (Error(..), Expect, Response, expectStringResponse)
 import Json.Decode as D
 
 {-| Request
@@ -210,3 +213,14 @@ bool2Uri: Bool -> String
 bool2Uri b = case b of
     True -> "false"
     False -> "true"
+
+{-| printHttpError
+-}
+printHttpError : Http.Error -> String
+printHttpError error =
+    case error of
+        BadUrl url -> "bad url : " ++ url
+        Timeout -> "timeout"
+        NetworkError -> "network error"
+        BadStatus s -> "bad status : " ++ String.fromInt s
+        BadBody s -> "bad body : " ++ s
