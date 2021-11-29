@@ -12,14 +12,15 @@ module Perfimmo.Http.HttpRequest exposing
     , request
     , authRequest
     , bool2Uri
-    , printHttpError)
+    , printHttpError
+    , withAuthReqWithHeaders)
 {-| HttpRequest
 
 # Types
 @docs Request, BodyResponse, HttpError, HttpResult, ResponseDecoder
 
 # Functions
-@docs withAuthReq, request, authRequest
+@docs withAuthReq, request, authRequest, withAuthReqWithHeaders
 
 # Helper
 @docs printHttpError
@@ -47,13 +48,18 @@ type Request a =
 {-| withAuthReq
 -}
 withAuthReq: Request a -> Cmd a
-withAuthReq req =
+withAuthReq req = withAuthReqWithHeaders [] req
+
+{-| withAuthReqWithHeaders
+-}
+withAuthReqWithHeaders: List Http.Header -> Request a -> Cmd a
+withAuthReqWithHeaders headers req =
     case req of
-       Get url msg -> executeRequest "GET" [] url Http.emptyBody msg
-       Delete url msg -> executeRequest "DELETE" [] url Http.emptyBody msg
-       Post url body msg -> executeRequest "POST" [] url body msg
-       Put url body msg -> executeRequest "PUT" [] url body msg
-       Patch url body msg -> executeRequest "PATCH" [] url body msg
+       Get url msg -> executeRequest "GET" headers url Http.emptyBody msg
+       Delete url msg -> executeRequest "DELETE" headers url Http.emptyBody msg
+       Post url body msg -> executeRequest "POST" headers url body msg
+       Put url body msg -> executeRequest "PUT" headers url body msg
+       Patch url body msg -> executeRequest "PATCH" headers url body msg
 
 {-| request
 -}
