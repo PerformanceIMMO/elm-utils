@@ -3,7 +3,7 @@
     "name": "PerformanceIMMO/elm-utils",
     "summary": "All common types and functions used by perfimmo dev",
     "license": "GPL-3.0",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "exposed-modules": [
         "Perfimmo.Cmd.ActionToCmd",
         "Perfimmo.Collection.List",
