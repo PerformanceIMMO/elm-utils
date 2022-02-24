@@ -1,7 +1,7 @@
 module Perfimmo.Html.Dom exposing
     ( onClick_stopProp
     , buildOptions
-    , selectViewOptions, selectView, buildFilterOptions, clearableSelect, clearableSelectOptions, datalistView)
+    , selectViewOptions, selectView, buildFilterOptions, clearableSelect, clearableSelectOptions, datalistView, datalistViewWithOptions)
 
 {-| Handle event propagation
 
@@ -11,14 +11,14 @@ module Perfimmo.Html.Dom exposing
 
 @docs selectViewOptions
 
-@docs datalistView
+@docs datalistView, datalistViewWithOptions
 
 @docs clearableSelect, clearableSelectOptions
 -}
 
 import Html.Styled.Events exposing (onClick, onInput, stopPropagationOn)
 import Json.Decode as Decode exposing (Decoder)
-import Html.Styled exposing (Html, button, datalist, div, input, option, select, text)
+import Html.Styled exposing (Attribute, Html, button, datalist, div, input, option, select, text)
 import Html.Styled.Attributes exposing (class, id, list, selected, type_, value)
 
 {-| onClick_stopProp
@@ -79,8 +79,16 @@ Current value is handle natively by DOM so it is avoided to be provided
 
 -}
 datalistView: (String -> msg) -> String -> (List String) -> Html msg
-datalistView msg listid elements = div []
-    [ input [ onInput msg, list listid, type_ "text" ] []
+datalistView msg listid elements = datalistViewWithOptions msg listid [] elements
+
+{-| datalistViewWithOptions
+
+Attributes are for input
+
+-}
+datalistViewWithOptions: (String -> msg) -> String -> (List (Attribute msg)) -> (List String) -> Html msg
+datalistViewWithOptions msg listid attrs elements = div []
+    [ input ([ onInput msg, list listid, type_ "text" ] ++ attrs) []
     , datalist [ id listid ]
         <| buildOptionsDatalist elements
     ]
