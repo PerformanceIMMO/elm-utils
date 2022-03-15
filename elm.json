@@ -3,9 +3,10 @@
     "name": "PerformanceIMMO/elm-utils",
     "summary": "All common types and functions used by perfimmo dev",
     "license": "GPL-3.0",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "exposed-modules": [
         "Perfimmo.Cmd.ActionToCmd",
+        "Perfimmo.Collection.NonEmptyListDecoder",
         "Perfimmo.Collection.List",
         "Perfimmo.Collection.NonEmptyList",
         "Perfimmo.Primitive.ExtendString",
@@ -19,7 +20,8 @@
         "Perfimmo.Http.NavigationLinkUtils",
         "Perfimmo.Http.RestNavigationLink",
         "Perfimmo.Http.RestAPIUtils",
-        "Perfimmo.Http.RestNavigationLinkDecoder"
+        "Perfimmo.Http.RestNavigationLinkDecoder",
+        "Perfimmo.Data.OfficialDataRef"
     ],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {

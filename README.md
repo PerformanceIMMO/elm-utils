@@ -31,3 +31,7 @@ Il faut donc qu'une application en `localhost` puisse envoyer le cookie à `back
 
 ### HATEOAS
 On a introduit une abstraction `RestNavigationLink` comme structure de donnée pour que le back fournisse au front le moyen de naviguer
+
+### Data
+
+Des listes de données utiles (comme la liste des pays en français par exemple)
