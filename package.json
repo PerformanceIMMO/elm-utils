@@ -5,16 +5,18 @@
     "repository": "https://github.com/PerformanceIMMO/elm-utils.git",
     "private": true,
     "dependencies": {
-        "elm": "^0.19.1-5",
-        "elm-test": "^0.19.1-revision7"
+        "elm": "^0.19.1-5"
     },
     "scripts": {
         "elm-exposed-module": "find src -name \"*.elm\" | cut -c5- | sed \"y/\\//./\" | sed \"s/.elm//\"",
-        "compile": "yarn elm make"
+        "compile": "yarn elm make",
+        "test": "yarn elm-test",
+        "tdd": "yarn elm-test --watch"
     },
     "devDependencies": {
         "elm-doc-preview": "5.0.5",
         "elm-json": "0.2.10",
-        "elm-review": "2.6.1"
+        "elm-review": "2.6.1",
+        "elm-test": "^0.19.1-revision7"
     }
 }
