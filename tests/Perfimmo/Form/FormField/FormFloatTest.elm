@@ -85,4 +85,13 @@ suite = describe "FormFloat Test"
              in result |> Expect.equal expected
 
         ]
+
+    , describe "FormFloat.add"
+        [ test "test FormFloat.add 0.1 0.2" <| \_ ->
+            -- https://0.30000000000000004.com/
+            let f1 = FormFloat.setValue 0.1 FormFloat.empty
+                f2 = FormFloat.setValue 0.2 FormFloat.empty
+                result = FormFloat.add f1 f2 |> FormFloat.toFloat
+            in result |> Expect.equal (Just 0.3)
+        ]
     ]

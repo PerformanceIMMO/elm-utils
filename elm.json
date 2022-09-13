@@ -3,7 +3,7 @@
     "name": "PerformanceIMMO/elm-utils",
     "summary": "All common types and functions used by perfimmo dev",
     "license": "GPL-3.0",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "exposed-modules": [
         "Perfimmo.Cmd.ActionToCmd",
         "Perfimmo.Form.FormField.FormDatalist",
@@ -43,7 +43,8 @@
         "json-tools/json-value": "1.0.1 <= v < 2.0.0",
         "justinmimbs/date": "4.0.1 <= v < 5.0.0",
         "mgold/elm-nonempty-list": "4.2.0 <= v < 5.0.0",
-        "rtfeldman/elm-css": "16.1.1 <= v < 17.0.0"
+        "rtfeldman/elm-css": "16.1.1 <= v < 17.0.0",
+        "torreyatcitty/the-best-decimal": "1.1.0 <= v < 2.0.0"
     },
     "test-dependencies": {
         "elm-explorations/test": "1.2.2 <= v < 2.0.0"

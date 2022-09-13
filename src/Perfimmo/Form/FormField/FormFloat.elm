@@ -26,6 +26,7 @@ pour gérer l'affichage ergonomique sur le formulaire
 @docs add
 -}
 
+import Decimal
 import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, formFieldComparable)
 import List.Extra as ListE
 
@@ -91,7 +92,13 @@ add: FormFloat -> FormFloat -> FormFloat
 add (FormFloat f1 _ i1) (FormFloat f2 _ i2) =
     let i = init <| i1 ++ i2
     in case (f1, f2) of
-        (Just x, Just y) -> setValue (x + y) i
+        (Just x, Just y) ->
+            let d1 = Decimal.fromFloat x
+                d2 = Decimal.fromFloat y
+            in Maybe.map2 Decimal.add d1 d2
+                |> Maybe.map (\v -> setValue (Decimal.toFloat v) i)
+                |> Maybe.withDefault (setValue (x + y) i)
+
         (Just x, Nothing) -> setValue x i
         (Nothing, Just x) -> setValue x i
         (Nothing, Nothing) -> i
