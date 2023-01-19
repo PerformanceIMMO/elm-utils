@@ -22,31 +22,30 @@ pour gérer l'affichage ergonomique sur le formulaire
 @docs getInfos
 -}
 
-import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, formFieldComparable)
-import List.Extra as ListE
+import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, initFormFieldInfos)
 
 {-| FormInt
 -}
-type FormInt = FormInt (Maybe Int) String (List FormFieldInfo)
+type FormInt decoration = FormInt (Maybe Int) String (List (FormFieldInfo decoration))
 
 {-| init
 -}
-init: List FormFieldInfo -> FormInt
-init infos = FormInt Nothing "" (infos |> ListE.uniqueBy formFieldComparable)
+init: List (FormFieldInfo decoration) -> FormInt decoration
+init infos = FormInt Nothing "" (initFormFieldInfos infos)
 
 {-| empty
 -}
-empty: FormInt
+empty: FormInt decoration
 empty = FormInt Nothing "" []
 
 {-| setValue
 -}
-setValue: Int -> FormInt -> FormInt
+setValue: Int -> FormInt decoration -> FormInt decoration
 setValue int (FormInt _ _ infos) = FormInt (Just int) (String.fromInt int) infos
 
 {-| setValueFromS
 -}
-setValueFromS: String -> FormInt -> FormInt
+setValueFromS: String -> FormInt decoration -> FormInt decoration
 setValueFromS raw (FormInt oldInt oldRaw infos) =
     let checkInt = String.toInt raw
             |> Maybe.map (\i -> (Just i, raw))
@@ -56,15 +55,15 @@ setValueFromS raw (FormInt oldInt oldRaw infos) =
 
 {-| toString
 -}
-toString: FormInt -> String
+toString: FormInt decoration -> String
 toString (FormInt _ s _) = s
 
 {-| toInt
 -}
-toInt: FormInt -> Maybe Int
+toInt: FormInt decoration -> Maybe Int
 toInt (FormInt int _ _) = int
 
 {-| getInfos
 -}
-getInfos: FormInt -> List FormFieldInfo
+getInfos: FormInt decoration -> List (FormFieldInfo decoration)
 getInfos (FormInt _ _ infos) = infos

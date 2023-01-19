@@ -25,33 +25,32 @@ pour gérer l'affichage ergonomique sur le formulaire
 
 -}
 
-import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, formFieldComparable)
+import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, addFormFieldInfo, initFormFieldInfos, removeFormFieldInfo)
 import Perfimmo.Form.FormField.FormFloat as FormFloat
-import List.Extra as ListE
 
 
 {-| FormPourcent
 -}
-type FormPourcent = FormPourcent (Maybe Float) String (List FormFieldInfo)
+type FormPourcent decoration = FormPourcent (Maybe Float) String (List (FormFieldInfo decoration))
 
 {-| init
 -}
-init: List FormFieldInfo -> FormPourcent
-init infos = FormPourcent Nothing "" infos
+init: List (FormFieldInfo decoration) -> FormPourcent decoration
+init infos = FormPourcent Nothing "" (initFormFieldInfos infos)
 
 {-| empty
 -}
-empty: FormPourcent
+empty: FormPourcent decoration
 empty = FormPourcent Nothing "" []
 
 {-| setValue
 -}
-setValue: Float -> FormPourcent -> FormPourcent
+setValue: Float -> FormPourcent decoration -> FormPourcent decoration
 setValue float form = testPourcent (String.fromFloat float) form float
 
 {-| setValueFromS
 -}
-setValueFromS: String -> FormPourcent -> FormPourcent
+setValueFromS: String -> FormPourcent decoration -> FormPourcent decoration
 setValueFromS raw form =
     let (FormPourcent _ _ infos) = form
         update = FormFloat.init infos
@@ -63,27 +62,27 @@ setValueFromS raw form =
 
 {-| toString
 -}
-toString: FormPourcent -> String
+toString: FormPourcent decoration -> String
 toString (FormPourcent _ s _) = s
 
 {-| toFloat
 -}
-toFloat: FormPourcent -> Maybe Float
+toFloat: FormPourcent decoration -> Maybe Float
 toFloat (FormPourcent v _ _) = v
 
 {-| addInfo
 -}
-addInfo: FormFieldInfo -> FormPourcent -> FormPourcent
-addInfo info (FormPourcent float s infos) = FormPourcent float s (infos ++ [info] |> ListE.uniqueBy formFieldComparable)
+addInfo: FormFieldInfo decoration -> FormPourcent decoration -> FormPourcent decoration
+addInfo info (FormPourcent float s infos) = FormPourcent float s (addFormFieldInfo infos info)
 
 {-| removeInfo
 -}
-removeInfo: FormFieldInfo -> FormPourcent -> FormPourcent
-removeInfo info (FormPourcent float s infos) = FormPourcent float s (ListE.filterNot ((==) info) infos)
+removeInfo: FormFieldInfo decoration -> FormPourcent decoration -> FormPourcent decoration
+removeInfo info (FormPourcent float s infos) = FormPourcent float s (removeFormFieldInfo infos info)
 
 {-| getInfos
 -}
-getInfos: FormPourcent -> List FormFieldInfo
+getInfos: FormPourcent decoration -> List (FormFieldInfo decoration)
 getInfos (FormPourcent _ _ infos) = infos
 
 testPourcent raw (FormPourcent oldFloat oldRaw info) float =

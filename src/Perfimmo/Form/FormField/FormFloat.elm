@@ -27,32 +27,31 @@ pour gérer l'affichage ergonomique sur le formulaire
 -}
 
 import Decimal
-import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, formFieldComparable)
-import List.Extra as ListE
+import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, addFormFieldInfo, initFormFieldInfos, removeFormFieldInfo)
 
 
 {-| FormFloat
 -}
-type FormFloat = FormFloat (Maybe Float) String (List FormFieldInfo)
+type FormFloat decoration = FormFloat (Maybe Float) String (List (FormFieldInfo decoration))
 
 {-| init
 -}
-init: List FormFieldInfo -> FormFloat
-init infos = FormFloat Nothing "" (infos |> ListE.uniqueBy formFieldComparable)
+init: List (FormFieldInfo decoration) -> FormFloat decoration
+init infos = FormFloat Nothing "" (initFormFieldInfos infos)
 
 {-| empty
 -}
-empty: FormFloat
+empty: FormFloat decoration
 empty = FormFloat Nothing "" []
 
 {-| setValue
 -}
-setValue: Float -> FormFloat -> FormFloat
+setValue: Float -> FormFloat decoration -> FormFloat decoration
 setValue float (FormFloat _ _ infos) = FormFloat (Just float) (String.fromFloat float) infos
 
 {-| setValueFromS
 -}
-setValueFromS: String -> FormFloat -> FormFloat
+setValueFromS: String -> FormFloat decoration -> FormFloat decoration
 setValueFromS raw (FormFloat oldFloat oldRaw infos) =
     let neutralFloat = String.replace "," "." raw
         checkFloat = String.toFloat neutralFloat
@@ -63,32 +62,32 @@ setValueFromS raw (FormFloat oldFloat oldRaw infos) =
 
 {-| toString
 -}
-toString: FormFloat -> String
+toString: FormFloat decoration -> String
 toString (FormFloat _ s _) = s
 
 {-| toFloat
 -}
-toFloat: FormFloat -> Maybe Float
+toFloat: FormFloat decoration -> Maybe Float
 toFloat (FormFloat float _ _) = float
 
 {-| addInfo
 -}
-addInfo: FormFieldInfo -> FormFloat -> FormFloat
-addInfo info (FormFloat float s infos) = FormFloat float s (infos ++ [info] |> ListE.uniqueBy formFieldComparable)
+addInfo: FormFieldInfo decoration -> FormFloat decoration -> FormFloat decoration
+addInfo info (FormFloat float s infos) = FormFloat float s (addFormFieldInfo infos info)
 
 {-| removeInfo
 -}
-removeInfo: FormFieldInfo -> FormFloat -> FormFloat
-removeInfo info (FormFloat float s infos) = FormFloat float s (ListE.filterNot ((==) info) infos)
+removeInfo: FormFieldInfo decoration -> FormFloat decoration -> FormFloat decoration
+removeInfo info (FormFloat float s infos) = FormFloat float s (removeFormFieldInfo infos info)
 
 {-| getInfos
 -}
-getInfos: FormFloat -> List FormFieldInfo
+getInfos: FormFloat decoration -> List (FormFieldInfo decoration)
 getInfos (FormFloat _ _ infos) = infos
 
 {-| add
 -}
-add: FormFloat -> FormFloat -> FormFloat
+add: FormFloat decoration -> FormFloat decoration -> FormFloat decoration
 add (FormFloat f1 _ i1) (FormFloat f2 _ i2) =
     let i = init <| i1 ++ i2
     in case (f1, f2) of

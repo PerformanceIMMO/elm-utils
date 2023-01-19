@@ -16,22 +16,22 @@ import Result as R
 
 {-| init
 -}
-init: Maybe Date -> List FormFieldInfo -> FormField Date
+init: Maybe Date -> List (FormFieldInfo decoration) -> FormField Date decoration
 init = FormField.init
 
 {-| empty
 -}
-empty: FormField Date
+empty: FormField Date decoration
 empty = FormField.empty
 
 {-| setValue
 -}
-setValue: Date -> FormField Date -> FormField Date
+setValue: Date -> FormField Date decoration -> FormField Date decoration
 setValue = FormField.setValue
 
 {-| setRawDate
 -}
-setRawDate: String -> FormField Date -> FormField Date
+setRawDate: String -> FormField Date decoration -> FormField Date decoration
 setRawDate rawDate form =
     let val = Date.fromIsoString rawDate |> R.toMaybe
     in FormField.init val (FormField.getInfos form)

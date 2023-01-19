@@ -26,14 +26,13 @@ module Perfimmo.Form.FormField.FormSelect exposing
 @docs addInfo, removeInfo, getInfos
 -}
 
-import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, formFieldComparable)
-import List.Extra as ListE
+import Perfimmo.Form.FormField.Common exposing (FormFieldInfo, addFormFieldInfo, initFormFieldInfos, removeFormFieldInfo)
 
 
 
 {-| FormSelect
 -}
-type FormSelect a = FormSelect (Value a) AvailableValues (List FormFieldInfo) (FromStringBuilder a) (ToString a)
+type FormSelect a decoration = FormSelect (Value a) AvailableValues (List (FormFieldInfo decoration)) (FromStringBuilder a) (ToString a)
 
 {-| Value
 -}
@@ -53,55 +52,55 @@ type alias ToString a = a -> String
 
 {-| init
 -}
-init: AvailableValues -> (List FormFieldInfo) -> FromStringBuilder a -> ToString a -> FormSelect a
-init values infos stringBuilder toString = FormSelect Nothing values infos stringBuilder toString
+init: AvailableValues -> (List (FormFieldInfo decoration)) -> FromStringBuilder a -> ToString a -> FormSelect a decoration
+init values infos stringBuilder toString = FormSelect Nothing values (initFormFieldInfos infos) stringBuilder toString
 
 {-| setValue
 -}
-setValue: a -> FormSelect a -> FormSelect a
+setValue: a -> FormSelect a decoration -> FormSelect a decoration
 setValue x (FormSelect _ values infos builder toString) = FormSelect (Just x) values infos builder toString
 
 {-| setValues
 -}
-setValues: AvailableValues -> FormSelect a -> FormSelect a
+setValues: AvailableValues -> FormSelect a decoration -> FormSelect a decoration
 setValues values (FormSelect val _ infos builder toString) = FormSelect val values infos builder toString
 
 {-| setValueFromS
 -}
-setValueFromS: String -> FormSelect a -> FormSelect a
+setValueFromS: String -> FormSelect a decoration -> FormSelect a decoration
 setValueFromS s (FormSelect _ values infos builder toString) = case String.trim s of
     "" -> FormSelect Nothing values infos builder toString
     _ -> FormSelect (builder s) values infos builder toString
 
 {-| getSelectValues
 -}
-getSelectValues: FormSelect a -> (Maybe String, List (String, String))
+getSelectValues: FormSelect a decoration -> (Maybe String, List (String, String))
 getSelectValues (FormSelect val values infos _ toString) =
     (Maybe.map toString val, values)
 
 {-| getValue
 -}
-getValue: FormSelect a -> Maybe a
+getValue: FormSelect a decoration -> Maybe a
 getValue (FormSelect val _ _ _ _) = val
 
 {-| getStringValue
 -}
-getStringValue: FormSelect a -> Maybe String
+getStringValue: FormSelect a decoration -> Maybe String
 getStringValue (FormSelect val _ _ _ toString) = Maybe.map toString val
 
 {-| addInfo
 -}
-addInfo: FormFieldInfo -> FormSelect a -> FormSelect a
+addInfo: FormFieldInfo decoration -> FormSelect a decoration -> FormSelect a decoration
 addInfo info (FormSelect val values infos builder toString) =
-    FormSelect val values (infos ++ [info] |> ListE.uniqueBy formFieldComparable) builder toString
+    FormSelect val values (addFormFieldInfo infos info) builder toString
 
 {-| removeInfo
 -}
-removeInfo: FormFieldInfo -> FormSelect a -> FormSelect a
+removeInfo: FormFieldInfo decoration -> FormSelect a decoration -> FormSelect a decoration
 removeInfo info (FormSelect val values infos builder toString) =
-    FormSelect val values (ListE.filterNot ((==) info) infos) builder toString
+    FormSelect val values (removeFormFieldInfo infos info) builder toString
 
 {-| getInfos
 -}
-getInfos: FormSelect a -> List FormFieldInfo
+getInfos: FormSelect a decoration -> List (FormFieldInfo decoration)
 getInfos (FormSelect _ _ infos _ _) = infos

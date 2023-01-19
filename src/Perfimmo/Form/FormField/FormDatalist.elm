@@ -36,7 +36,7 @@ import Maybe.FlatMap as MaybeF
 
 {-| FormDatalist
 -}
-type FormDatalist a = FormDatalist (FormSelect (ValueState a))
+type FormDatalist a decoration = FormDatalist (FormSelect (ValueState a) decoration)
 
 {-|
 indique le statut de la saisie :
@@ -47,7 +47,7 @@ type ValueState a = ChosenItem a | InputSearch String
 
 {-| init
 -}
-init: List String -> List FormFieldInfo -> FromStringBuilder a -> ToString a -> FormDatalist a
+init: List String -> List (FormFieldInfo decoration) -> FromStringBuilder a -> ToString a -> FormDatalist a decoration
 init values infos stringBuilder toString =
     let tupledValues = List.map (\x -> (x, x)) values
         dlFromStringBuilder = builder values stringBuilder
@@ -56,7 +56,7 @@ init values infos stringBuilder toString =
 
 {-| setValue
 -}
-setValue: a -> FormDatalist a -> FormDatalist a
+setValue: a -> FormDatalist a decoration -> FormDatalist a decoration
 setValue x (FormDatalist select) = FormDatalist <| FormSelect.setValue (ChosenItem x) select
 
 -- TODO si setValues, change FromStringBuilder & ToString
@@ -65,17 +65,17 @@ setValues values (FormDatalist select) = FormDatalist <| FormSelect.setValues va
 
 {-| setValueFromS
 -}
-setValueFromS: String -> FormDatalist a -> FormDatalist a
+setValueFromS: String -> FormDatalist a decoration -> FormDatalist a decoration
 setValueFromS raw (FormDatalist select) = FormDatalist <| FormSelect.setValueFromS raw select
 
 {-| getValue
 -}
-getValue: FormDatalist a -> Maybe (ValueState a)
+getValue: FormDatalist a decoration -> Maybe (ValueState a)
 getValue (FormDatalist select) = FormSelect.getValue select
 
 {-| getSelectValues
 -}
-getSelectValues: FormDatalist a -> (Maybe (ValueState String), List String)
+getSelectValues: FormDatalist a decoration -> (Maybe (ValueState String), List String)
 getSelectValues (FormDatalist select) =
     let (x, values) = FormSelect.getSelectValues select
         state = case getValue (FormDatalist select) of
@@ -88,22 +88,22 @@ getSelectValues (FormDatalist select) =
 
 {-| getStringValue
 -}
-getStringValue: FormDatalist a -> Maybe String
+getStringValue: FormDatalist a decoration -> Maybe String
 getStringValue (FormDatalist select) = FormSelect.getStringValue select
 
 {-| addInfo
 -}
-addInfo: FormFieldInfo -> FormDatalist a -> FormDatalist a
+addInfo: (FormFieldInfo decoration) -> FormDatalist a decoration -> FormDatalist a decoration
 addInfo info (FormDatalist select) = FormDatalist <| FormSelect.addInfo info select
 
 {-| removeInfo
 -}
-removeInfo: FormFieldInfo -> FormDatalist a -> FormDatalist a
+removeInfo: (FormFieldInfo decoration) -> FormDatalist a decoration -> FormDatalist a decoration
 removeInfo info (FormDatalist select) = FormDatalist <| FormSelect.removeInfo info select
 
 {-| getInfos
 -}
-getInfos: FormDatalist a -> List FormFieldInfo
+getInfos: FormDatalist a decoration -> List (FormFieldInfo decoration)
 getInfos (FormDatalist select) = FormSelect.getInfos select
 
 builder: List String -> FromStringBuilder a -> FromStringBuilder (ValueState a)
