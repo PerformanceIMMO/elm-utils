@@ -10,7 +10,10 @@ module Perfimmo.Form.FormField.FormMultiSelect exposing
     , addInfo
     , removeInfo
     , getInfos
-    , view)
+    , view
+    , subscriptions
+    , getMultiselectModel
+    )
 
 {-| FormMultiSelect
 
@@ -22,7 +25,7 @@ module Perfimmo.Form.FormField.FormMultiSelect exposing
 
 @docs addInfo, removeInfo, getInfos
 
-@docs view
+@docs view, subscriptions, getMultiselectModel
 -}
 
 import Html.Styled as Styled
@@ -132,6 +135,15 @@ getInfos (FormMultiSelect _ infos) = infos
 view: FormMultiSelect decoration -> Styled.Html Multiselect.Msg
 view (FormMultiSelect model _) = Multiselect.view model|> Styled.fromUnstyled
 
--- TODO gérer les souscriptions
+{-| Allow the unfocus multiselect DOM Element
+-}
+subscriptions : FormMultiSelect decoration -> Sub Multiselect.Msg
+subscriptions (FormMultiSelect model _) = Multiselect.subscriptions model
+
+{-| allow to handle Multiselect things that is not handled by FormMultiSelect
+-}
+getMultiselectModel: FormMultiSelect decoration -> Multiselect.Model
+getMultiselectModel (FormMultiSelect model _) = model
+
 -- TODO configurer comme select simple
 -- TODO configurer le nombre d'éléments max et min de la multilist
