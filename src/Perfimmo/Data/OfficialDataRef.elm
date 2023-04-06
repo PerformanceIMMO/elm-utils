@@ -4,12 +4,12 @@ module Perfimmo.Data.OfficialDataRef exposing
     , fromPaysToCode
     , formeJuridiquesTuples
     , fromCodeToFormeJuridique
-    , fromForceJuridiqueToCode
+    , fromFormeJuridiqueToCode
     )
 
 {-| liste de données utiles
 
-@docs  paysTuples, fromCodeToPays, fromPaysToCode, formeJuridiquesTuples, fromCodeToFormeJuridique, fromForceJuridiqueToCode
+@docs  paysTuples, fromCodeToPays, fromPaysToCode, formeJuridiquesTuples, fromCodeToFormeJuridique, fromFormeJuridiqueToCode
 -}
 
 {-| Liste des pays en français
@@ -303,6 +303,8 @@ fromPaysToCode pays = paysTuples
 
     https://www.insee.fr/fr/information/2028129
 
+    version : cj_septembre_2022
+
     [ ("0000", "Organisme de placement collectif en ...")
     , ("1000", "Entrepreneur individuel")
     , ("2110", "Indivision entre personnes physiques")
@@ -311,6 +313,8 @@ fromPaysToCode pays = paysTuples
 -}
 formeJuridiquesTuples : List (String, String)
 formeJuridiquesTuples =
+    {-------------------------------------- NIVEAU III ---------------------------------------}
+
     [ ("0000", "Organisme de placement collectif en valeurs mobilières sans personnalité morale")
     , ("1000", "Entrepreneur individuel")
     , ("2110", "Indivision entre personnes physiques")
@@ -322,6 +326,7 @@ formeJuridiquesTuples =
     , ("2385", "Société en participation de professions libérales")
     , ("2400", "Fiducie")
     , ("2700", "Paroisse hors zone concordataire")
+    , ("2800", "Assujetti unique à la TVA")
     , ("2900", "Autre groupement de droit privé non doté de la personnalité morale")
     , ("3110", "Représentation ou agence commerciale d'état ou organisme public étranger immatriculé au RCS")
     , ("3120", "Société commerciale étrangère immatriculée au RCS")
@@ -363,7 +368,7 @@ formeJuridiquesTuples =
     , ("5453", "SARL coopérative artisanale")
     , ("5454", "SARL coopérative d'intérêt maritime")
     , ("5455", "SARL coopérative de transport")
-    , ("5458", "SARL coopérative ouvrière de production (SCOP)")
+    , ("5458", "SARL coopérative de production (SCOP)")
     , ("5459", "SARL union de sociétés coopératives")
     , ("5460", "Autre SARL coopérative")
     , ("5470", "Société de Participations Financières de Profession Libérale Société à responsabilité limitée (SPFPL SARL)")
@@ -388,7 +393,7 @@ formeJuridiquesTuples =
     , ("5553", "SA coopérative artisanale à conseil d'administration")
     , ("5554", "SA coopérative (d'intérêt) maritime à conseil d'administration")
     , ("5555", "SA coopérative de transport à conseil d'administration")
-    , ("5558", "SA coopérative ouvrière de production (SCOP) à conseil d'administration")
+    , ("5558", "SA coopérative de production  (SCOP) à conseil d'administration")
     , ("5559", "SA union de sociétés coopératives à conseil d'administration")
     , ("5560", "Autre SA coopérative à conseil d'administration")
     , ("5570", "Société de Participations Financières de Profession Libérale Société anonyme à conseil d'administration (SPFPL SA à conseil d'administration)")
@@ -413,7 +418,7 @@ formeJuridiquesTuples =
     , ("5653", "SA coopérative artisanale à directoire")
     , ("5654", "SA coopérative d'intérêt maritime à directoire")
     , ("5655", "SA coopérative de transport à directoire")
-    , ("5658", "SA coopérative ouvrière de production (SCOP) à directoire")
+    , ("5658", "SA coopérative de production (SCOP) à directoire")
     , ("5659", "SA union de sociétés coopératives à directoire")
     , ("5660", "Autre SA coopérative à directoire")
     , ("5670", "Société de Participations Financières de Profession Libérale Société anonyme à Directoire (SPFPL SA à directoire)")
@@ -570,6 +575,60 @@ formeJuridiquesTuples =
     , ("9300", "Fondation")
     , ("9900", "Autre personne morale de droit privé")
     , ("9970", "Groupement de coopération sanitaire à gestion privée")
+
+    {-------------------------------------- NIVEAU I -----------------------------------------}
+
+    , ("0", "Organisme de placement collectif en valeurs mobilières sans personnalité morale")
+    , ("1", "Entrepreneur individuel")
+    , ("2", "Groupement de droit privé non doté de la personnalité morale")
+    , ("3", "Personne morale de droit étranger")
+    , ("4", "Personne morale de droit public soumise au droit commercial")
+    , ("5", "Société commerciale")
+    , ("6", "Autre personne morale immatriculée au RCS")
+    , ("7", "Personne morale et organisme soumis au droit administratif")
+    , ("8", "Organisme privé spécialisé")
+    , ("9", "Groupement de droit privé")
+
+    {-------------------------------------- NIVEAU II ----------------------------------------}
+    , ("00", "Organisme de placement collectif en valeurs mobilières sans personnalité morale")
+    , ("10", "Entrepreneur individuel")
+    , ("21", "Indivision")
+    , ("22", "Société créée de fait")
+    , ("23", "Société en participation")
+    , ("24", "Fiducie")
+    , ("27", "Paroisse hors zone concordataire")
+    , ("28", "Assujetti unique à la TVA")
+    , ("29", "Autre groupement de droit privé non doté de la personnalité morale")
+    , ("31", "Personne morale de droit étranger, immatriculée au RCS (registre du commerce et des sociétés)")
+    , ("32", "Personne morale de droit étranger, non immatriculée au RCS")
+    , ("41", "Etablissement public ou régie à caractère industriel ou commercial")
+    , ("51", "Société coopérative commerciale particulière")
+    , ("52", "Société en nom collectif")
+    , ("53", "Société en commandite")
+    , ("54", "Société à responsabilité limitée (SARL)")
+    , ("55", "Société anonyme à conseil d'administration")
+    , ("56", "Société anonyme à directoire")
+    , ("57", "Société par actions simplifiée")
+    , ("58", "Société européenne")
+    , ("61", "Caisse d'épargne et de prévoyance")
+    , ("62", "Groupement d'intérêt économique")
+    , ("63", "Société coopérative agricole")
+    , ("64", "Société d'assurance mutuelle")
+    , ("65", "Société civile")
+    , ("69", "Autre personne morale de droit privé inscrite au registre du commerce et des sociétés")
+    , ("71", "Administration de l'état")
+    , ("72", "Collectivité territoriale")
+    , ("73", "Etablissement public administratif")
+    , ("74", "Autre personne morale de droit public administratif")
+    , ("81", "Organisme gérant un régime de protection sociale à adhésion obligatoire")
+    , ("82", "Organisme mutualiste")
+    , ("83", "Comité d'entreprise")
+    , ("84", "Organisme professionnel")
+    , ("85", "Organisme de retraite à adhésion non obligatoire")
+    , ("91", "Syndicat de propriétaires")
+    , ("92", "Association loi 1901 ou assimilé")
+    , ("93", "Fondation")
+    , ("99", "Autre personne morale de droit privé")
     ]
 
 {-|
@@ -582,10 +641,10 @@ fromCodeToFormeJuridique code = formeJuridiquesTuples
     |> List.head
 
 {-|
-    fromForceJuridiqueToCode "Indivision entre personnes physiques"
+    fromFormeJuridiqueToCode "Indivision entre personnes physiques"
         == Just "2110"
 -}
-fromForceJuridiqueToCode: String -> Maybe String
-fromForceJuridiqueToCode pays = formeJuridiquesTuples
+fromFormeJuridiqueToCode: String -> Maybe String
+fromFormeJuridiqueToCode pays = formeJuridiquesTuples
     |> List.filterMap (\(code, p) -> if p == pays then Just code else Nothing)
     |> List.head
