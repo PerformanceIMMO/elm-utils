@@ -2,7 +2,7 @@ module Perfimmo.Primitive.NonEmptyStringTest exposing (..)
 
 import Expect
 import Fuzz
-import Perfimmo.Primitive.NonEmptyString as NonEmptyString
+import Perfimmo.Primitive.NonEmptyString as NonEmptyString exposing (..)
 import Test exposing (..)
 
 
@@ -14,6 +14,7 @@ suite =
         , fuzz (Fuzz.stringOfLengthBetween 1 100) "constructor should return an instance if non-empty input" <|
             \value ->
                 let
+                    actual : Maybe NonEmptyString
                     actual =
                         NonEmptyString.fromString value
 
