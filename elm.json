@@ -3,7 +3,7 @@
     "name": "PerformanceIMMO/elm-utils",
     "summary": "All common types and functions used by perfimmo dev",
     "license": "GPL-3.0",
-    "version": "5.0.0",
+    "version": "5.1.0",
     "exposed-modules": [
         "Perfimmo.Cmd.ActionToCmd",
         "Perfimmo.Form.FormField.FormDatalist",
@@ -19,6 +19,8 @@
         "Perfimmo.Collection.List",
         "Perfimmo.Collection.NonEmptyList",
         "Perfimmo.Primitive.ExtendString",
+        "Perfimmo.Primitive.NonEmptyString",
+        "Perfimmo.Primitive.NonBlankString",
         "Perfimmo.Primitive.CharUtils",
         "Perfimmo.Primitive.BoolUtils",
         "Perfimmo.Html.Dom",
@@ -49,6 +51,6 @@
         "torreyatcitty/the-best-decimal": "1.1.0 <= v < 2.0.0"
     },
     "test-dependencies": {
-        "elm-explorations/test": "1.2.2 <= v < 2.0.0"
+        "elm-explorations/test": "2.1.0 <= v < 2.1.1"
     }
 }
