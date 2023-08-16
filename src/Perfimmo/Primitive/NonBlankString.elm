@@ -1,14 +1,15 @@
-module Perfimmo.Primitive.NonBlankString exposing (fromString, toString)
+module Perfimmo.Primitive.NonBlankString exposing (fromString, toString, NonBlankString)
 
 {-| NonBlankString
 
-@docs fromString, toString
+@docs fromString, toString, NonBlankString
 
 -}
 
 import Perfimmo.Primitive.ExtendString exposing (stringToNonEmptyString)
 
-
+{-| NonBlankString
+-}
 type NonBlankString
     = NonBlankString String
 

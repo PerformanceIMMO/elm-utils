@@ -1,7 +1,7 @@
 module Perfimmo.Primitive.NonBlankStringTest exposing (..)
 
 import Expect
-import Perfimmo.Primitive.NonBlankString as NonBlankString
+import Perfimmo.Primitive.NonBlankString as NonBlankString exposing (..)
 import Test exposing (..)
 
 
@@ -23,6 +23,7 @@ suite =
         , test "constructor should return an instance on spaced String" <|
             \_ ->
                 let
+                    actual : Maybe NonBlankString
                     actual =
                         NonBlankString.fromString "    \tfooo     "
                 in
