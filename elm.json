@@ -26,6 +26,8 @@
         "Perfimmo.Html.Dom",
         "Perfimmo.Json.Json",
         "Perfimmo.Json.Decoder",
+        "Perfimmo.Json.NonBlankString",
+        "Perfimmo.Json.NonEmptyString",
         "Perfimmo.Http.Headers",
         "Perfimmo.Http.HttpRequest",
         "Perfimmo.Http.NavigationLinkUtils",
