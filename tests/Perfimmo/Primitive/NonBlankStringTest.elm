@@ -1,12 +1,15 @@
 module Perfimmo.Primitive.NonBlankStringTest exposing (..)
 
 import Expect
+import Fuzz
 import Perfimmo.Primitive.NonBlankString as NonBlankString exposing (..)
 import Test exposing (..)
+import Utils exposing (fuzzFilterMap)
 
 
-innerString =
-    Maybe.map NonBlankString.toString
+nonBlankStringFuzzer : Fuzz.Fuzzer NonBlankString
+nonBlankStringFuzzer =
+    Fuzz.stringOfLengthBetween 1 100 |> fuzzFilterMap NonBlankString.fromString
 
 
 suite =
@@ -23,9 +26,19 @@ suite =
         , test "constructor should return an instance on spaced String" <|
             \_ ->
                 let
+                    innerString =
+                        Maybe.map NonBlankString.toString
+
                     actual : Maybe NonBlankString
                     actual =
                         NonBlankString.fromString "    \tfooo     "
                 in
                 Expect.equal (innerString actual) <| Just "    \tfooo     "
+        , fuzz2 nonBlankStringFuzzer Fuzz.string "append any string to NonBlankString should return a NonBlankString" <|
+            \nonBlankString string ->
+                let
+                    actual =
+                        NonBlankString.append nonBlankString string
+                in
+                Expect.equal (NonBlankString.toString actual) <| NonBlankString.toString nonBlankString ++ string
         ]
