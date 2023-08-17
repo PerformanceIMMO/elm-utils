@@ -41,4 +41,11 @@ suite =
                         NonBlankString.append nonBlankString string
                 in
                 Expect.equal (NonBlankString.toString actual) <| NonBlankString.toString nonBlankString ++ string
+        , fuzz2 nonBlankStringFuzzer Fuzz.string "prepend any string to NonBlankString should return a NonBlankString" <|
+            \nonBlankString string ->
+                let
+                    actual =
+                        NonBlankString.prepend nonBlankString string
+                in
+                Expect.equal (NonBlankString.toString actual) <| string ++ NonBlankString.toString nonBlankString
         ]
