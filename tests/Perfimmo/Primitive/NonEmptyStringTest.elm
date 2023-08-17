@@ -35,4 +35,11 @@ suite =
                         NonEmptyString.append nonEmptyString string
                 in
                 Expect.equal (NonEmptyString.toString actual) <| NonEmptyString.toString nonEmptyString ++ string
+        , fuzz2 nonEmptyStringFuzzer Fuzz.string "prepend any string to NonEmptyString should return a NonEmptyString" <|
+            \nonEmptyString string ->
+                let
+                    actual =
+                        NonEmptyString.prepend nonEmptyString string
+                in
+                Expect.equal (NonEmptyString.toString actual) <| string ++ NonEmptyString.toString nonEmptyString
         ]

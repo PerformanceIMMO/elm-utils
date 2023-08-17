@@ -1,8 +1,8 @@
-module Perfimmo.Primitive.NonEmptyString exposing (fromString, toString, NonEmptyString, append)
+module Perfimmo.Primitive.NonEmptyString exposing (fromString, toString, NonEmptyString, append, prepend)
 
 {-| NonEmptyString
 
-@docs fromString, toString, NonEmptyString, append
+@docs fromString, toString, NonEmptyString, append, prepend
 
 -}
 
@@ -34,3 +34,10 @@ toString (NonEmptyString input) =
 append : NonEmptyString -> String -> NonEmptyString
 append (NonEmptyString nonEmptyString) string =
     NonEmptyString (nonEmptyString ++ string)
+
+
+{-| prepend
+-}
+prepend : NonEmptyString -> String -> NonEmptyString
+prepend (NonEmptyString nonEmptyString) string =
+    NonEmptyString (string ++ nonEmptyString)
